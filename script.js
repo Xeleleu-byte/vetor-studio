@@ -1,4 +1,56 @@
-<<<<<<< HEAD
-=======
+const formulario = document.getElementById("form-contato");
 
->>>>>>> 50c26adafd6c1a01cff1524b6eea509cf23a05b6
+formulario.addEventListener("submit", function(evento) {
+    evento.preventDefault();
+
+    const campoNome = document.getElementById("nome");
+    const campoEmail = document.getElementById("email");
+    const campoTipo = document.getElementById("tipo-site");
+    const campoMensagem = document.getElementById("mensagem");
+
+    const nome = campoNome.value.trim();
+    const email = campoEmail.value.trim();
+    const tipo = campoTipo.value;
+    const mensagem = campoMensagem.value.trim();
+
+    if (nome === "") {
+        alert("Por favor, informe seu nome.");
+        campoNome.focus();
+        return;
+    }
+
+    if (email === "" || !campoEmail.checkValidity()) {
+        alert("Por favor, informe um e-mail válido.");
+        campoEmail.focus();
+        return;
+    }
+
+    if (tipo === "") {
+        alert("Por favor, escolha o tipo de site.");
+        campoTipo.focus();
+        return;
+    }
+
+    if (mensagem === "") {
+        alert("Por favor, escreva uma mensagem sobre seu projeto.");
+        campoMensagem.focus();
+        return;
+    }
+
+    const tipoEscolhido = campoTipo.options[campoTipo.selectedIndex].text;
+
+    const telefone = "5584991370294";
+
+    const textoWhatsApp =
+        `*SOLICITAÇÃO DE ORÇAMENTO - VETOR STUDIO*\n\n` +
+        `*Nome:* ${nome}\n` +
+        `*E-mail:* ${email}\n` +
+        `*Tipo de site:* ${tipoEscolhido}\n\n` +
+        `*Detalhes do projeto:*\n${mensagem}\n\n` +
+        `Aguardo o retorno da equipe Vetor Studio!`;
+
+    const linkWhatsApp =
+        `https://wa.me/${telefone}?text=${encodeURIComponent(textoWhatsApp)}`;
+
+    window.open(linkWhatsApp, "_blank", "noopener,noreferrer");
+});
